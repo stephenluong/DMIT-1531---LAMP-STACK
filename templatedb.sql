@@ -17,19 +17,19 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `walmartdb`
+-- Database: `storagedb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `iteminfo`
+-- Table structure for table `storagetb`
 --
 
-CREATE TABLE `iteminfo` (
+CREATE TABLE `storagetb` (
   `id` int(10) NOT NULL,
-  `productname` varchar(25) NOT NULL,
-  `brandname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `lastname` varchar(25) NOT NULL,
   `hardware` varchar(25) NOT NULL,
   `address` varchar(25) NOT NULL,
   `spec` varchar(25) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `iteminfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `iteminfo`
+-- Dumping data for table `storagetb`
 --
 
 INSERT INTO `storagetb` (`id`, `firstname`, `lastname`, `hardware`, `address`, `spec`, `vendor`) VALUES
