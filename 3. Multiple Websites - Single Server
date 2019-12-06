@@ -1,0 +1,80 @@
+/etc/apache2/sites-available???
+
+1.
+cd /etc/apache2/sites-available 
+
+ls
+
+more webmin.1554226189.conf < webmin.name < will differ. 
+
+Webmin Config deletions.
+
+SELECT
+DELETE
+APPLY (COMMIT)
+
+TERMINAL: 
+
+cd /var/www
+
+ls
+
+DELETE ENTIRE site? directory. 
+
+rm –r html site1 
+
+cd more /etc/hosts 
+
+vi hosts
+
+more /etc/netplan/01-netcfg.yaml 
+< checks if IPs were added successfully.
+
+1.
+Create HTML Web dirs for Sites 
+
+cd /var/www
+
+mkdir site### 
+mkdir site###
+mkdir site###
+mkdir ....etc..
+
+cd /var/www/site### 
+
+nano index.html 
+
+"Welcome to my almighty site.com" 
+
+cd ../site# (To Navigate within directory)
+
+2.
+Webmin Config: (Apache Webserver)
+
+1-	Click on Specific address
+2-	Type 192.168.55.101 in the field
+3-	Click on Any next for Port
+4-	Browse to select where the HTML files are 		located for site1
+
+Server Name: Site### NOT AUTOMATIC***
+
+Confirm Configurations:
+
+cd /etc/apache2/sites-available 
+
+ls
+
+cd /etc/netplan 
+
+ls
+
+more 01-netcfg.yaml
+
+cd /home 
+
+more /etc/hosts 
+
+cd /etc/apache2/sites-available 
+more Site###.com.conf
+
+

@@ -1,0 +1,159 @@
+1.
+Login to phpmyadmin:
+
+http://localhost/phpmyadmin
+
+Username: phpmyadmin
+password: Password@123
+
+Click on "Databases" 
+
+No Access... 
+
+In Terminal, Logon as Sudo User:
+
+2.
+
+mysql
+
+Creating new user with CREATE USER:
+
+***OG***
+CREATE USER 'administrator'@'localhost' IDENTIFIED BY 'administrator123';
+
+Full Access to db with GRANT ALL PRIVILEGES:
+
+GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'localhost' WITH GRANT OPTION;
+
+Reloads grants tables in mysql db: 
+
+FLUSH PRIVILEGES;
+
+3.
+Login in to phpmyadmin:
+
+Click on "Databases"
+
+create database
+create table with x amount of need columns
+
+structure your tables as required:
+
+insert data/information into your tables:
+
+4.
+Back to Terminal:
+
+mysql>
+show databases;
+use salesdb;
+show tables;
+
+viewing the information:
+
+mysql>
+describe tablename;
+
+SELECT * FROM contactinfo; 
+SELECT * FROM contactinfo WHERE id = 1; 
+
+exit to leave MySQL command terminal.
+
+5.
+Create a new website to dynamically display the database. 
+
+THE STEPS:
+
+- Add a virtual interface in Webmin using 192.168.55.105 as an IPv4 address.
+:(Network Interface >"Networking"<)
+
+- Adjust the /etc/hosts file and make sure it responds to site5.com requests
+
+cd /etc/
+nano hosts
+
+- Create the web directory for site5.com under /var/www and name the new directory site5
+
+cd /var/www/
+mkdir site5
+cd site5
+nano index.html < Not needed> 
+"Welcome..." 
+Welcome to Site1.com
+
+
+
+- Create a virtual directory for site5.com using Webmin and don’t forget to click on Apply Changes
+
+straightforward.
+
+6. 
+>root@lamp-1:/var/www/site5#<
+
+vi or nano index.php
+
+Add in txt file: 
+*** WATCH SYNTAX BASED ON REQUIREMENTS *** 
+
+$connection = mysqli_connect("localhost","administrator","administrator123");
+$db = mysqli_select_db($connection,'salesdb');
+
+
+$query = "SELECT * FROM salesdb.contactinfo where id='$id'";
+$query_run = mysqli_query($connection,$query);
+
+
+***COPY-PASTE THIS CODE***
+
+<html>
+<head>
+<title> Search Data into TextBox </title>
+</head>
+<body>
+	<center>
+	<h1>DMIT1531 Final LOAD TEST Exercise</h1>
+		<form action"" method="POST">
+			<input type="text" name="id" placeholder="Enter ID To Search"><br>
+			<input type="submit" name="search" value="Submit">
+		</form>
+<?php
+$connection = mysqli_connect("localhost","administrator","administrator123");
+$db = mysqli_select_db($connection,'salesdb');
+
+if(isset($_POST['search']))
+{
+	$id = $_POST['id'];
+
+	$query = "SELECT * FROM salesdb.contactinfo where id='$id'";
+	$query_run = mysqli_query($connection,$query);
+
+	while($row = mysqli_fetch_array($query_run))
+	{
+?>
+	<form action="" method"POST">
+		<input type="hidden" name="id" value="<?php echo $row['id']; ?>"/><br>
+		<input type="text" name="fname" value="<?php echo $row['firstname']; ?>"/><br>
+		<input type="text" name="lname" value="<?php echo $row['lastname']; ?>"/><br>
+		<input type="text" name="email" value="<?php echo $row['email']; ?>"/><br>
+		<input type="text" name="password" value="<?php echo $row['password']; ?>"/><br>
+		<input type="text" name="address" value="<?php echo $row['address']; ?>"/><br>
+		<input type="text" name="phone" value="<?php echo $row['phone']; ?>"/><br>
+	</form>
+	<?php
+	}
+}
+	?>
+	</center>
+</body>
+</html>
+
+SYNTAX ERROR CHECK:
+
+php -f index.php 
+
+
+7.
+SWITCH TO FIREFOX:
+
+site5.com/index.php 
+

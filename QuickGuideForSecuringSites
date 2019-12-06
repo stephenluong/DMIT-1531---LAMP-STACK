@@ -1,0 +1,86 @@
+Use both SSL and Apache Authentication to secure a designated site. 
+***Recommend you snapshot your vm just incase anything goes wrong.***
+
+1. Create two separate users and passwords:
+
+htpasswd -c /etc/apache2/.htpasswd user1
+PW: password1
+htpasswd /etc/apache2/.htpasswd user2
+PW: password2
+
+
+2. Add hidden htaccess config to /var/www/site###
+
+cd /var/www/site###
+
+nano .htaccess
+
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require user user1
+
+Save as .htaccess and quit
+
+
+3. Enable override in apache2.conf file
+
+cd /etc/apache2
+
+SNAPSHOT OR BACKUP YOUR FILE
+cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkup
+
+nano apache2.conf 
+Find this section of the file 
+
+<Directory /var/www/>
+	Options Indexes FollowSymLinks
+	AllowOverride All
+	Require all granted
+</Directory>
+
+Change the AllowOerride from "None" to "All" 
+
+Save and quit. 
+
+Service apache2 restart
+
+a2enmod ssl
+systemctl restart apache2
+
+mkdir /etc/apache2/ssl 
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+Enter the following
+CA
+Alberta
+Edmonton
+NAIT
+DMIT
+***Common Name (e.g. server FQDN or YOUR name) []:site###.com ***
+skip
+
+
+4. Add both SSL and Apache Authentication to site.com.conf files 
+
+cd /etc/apache2/sites-available
+
+nano site###.com.conf 
+
+Add below "ServerName site###.com
+SSLEngine on
+SSLCertificateFile /etc/apache2/ssl/apache.crt
+SSLCertificatekeyFile /etc/apache2/ssl/apache.key
+
+Add below "<Directory "/var/www/site###">"
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require user user1
+
+5. Reload and Test
+
+a2ensite site4.com 
+service apache2 reload
+
+https//site###.com

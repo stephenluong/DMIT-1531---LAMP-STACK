@@ -1,0 +1,109 @@
+***
+
+
+"q" - quit to exit service status checks. 
+
+apt-get install ubuntu-desktop
+
+If you run into errors, type apt-get update then type apt upgrade
+
+"reboot + enter"
+
+Type apt install open-vm-tools-desktop then press enter
+
+
+1.
+sudo su
+apt install open-vm-tools-desktop	
+apt-get update
+apt-get upgrade
+
+
+1.1
+Encyrption Keys: 
+
+wget -qO- http://www.webmin.com/jcameron-key.asc | sudo apt-key add 
+
+1.2
+
+add-apt-repository "deb http://download.webmin.com/download/repository sarge contrib"
+
+2.	
+apt update
+
+apt-get install webmin
+
+Access Webmin:
+
+https://localhost:10000
+
+3.
+apt-get install apache2 
+
+Status Check:
+
+service apache2 status
+
+4.
+apt-get install php  
+
+php -version
+
+4.1
+cd /var/www 
+
+ls
+
+cd html 
+
+ls
+
+html# more index.html
+
+vi or nano info.php 
+
+4.2 
+Copy/paste into txtfile.
+
+<?php
+
+phpinfo();
+
+Press ESC and type: wq!
+
+ls 
+
+http://localhost/info.php
+
+5.
+cd /home 
+
+apt-get install mysql-server 
+(Y) 
+
+service mysql status 
+
+5.1
+mysql_secure_installation
+
+press "enter" - type password123 press "enter" - root MySQL 
+
+Y * 4
+
+4. 
+Install phpmyadmin:
+
+apt-get install phpmyadmin 
+	
+***
+Press: "space" bar to select apache2     Then : "Enter" 
+
+Password: Password@123
+/etc/apache2/conf-enabled/phpmyadmin.conf
+
+
+5.
+FTP Package
+
+apt-get install vsftpd 
+

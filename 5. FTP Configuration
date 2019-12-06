@@ -1,0 +1,28 @@
+
+1.
+Check if FTP is running: 
+
+service vsftpd status 
+CTRL C - quit. 
+
+Open FireFox WB:
+ftp://site1.com 
+
+2.
+Add FTP user:
+
+adduser ftpuser1 
+
+password: lowercase > password1 < 
+
+systemctl restart vsftpd 
+
+3.
+cd /home/ftpuser1
+
+ls
+
+touch testing123456 
+
+validation of users not disallowed:
+vi or nano /etc/ftpusers 

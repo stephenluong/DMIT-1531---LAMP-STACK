@@ -1,0 +1,57 @@
+1.
+Click on “I will install the operating system later.”
+
+Linux
+Ubuntu 64-bit
+
+8GB RAM
+20.0 Disk Size.
+
+Ubuntu ISO file called “ubunto-18.04.2-live-server-adm64”. 
+
+2.
+Install Ubuntu
+
+DEFAULTS{
+
+TCP/IP v4
+
+PROXY ADDRESS
+
+MIRROR ADDRESS
+
+>Use an Entire Disk<
+
+}
+
+"Continue" 
+
+3.
+Profile Setup:
+
+name:
+Server name:
+
+username:
+
+password: password
+
+In the SSH setup stage:
+ press enter to install OpenSSH server, done with keyboard. 
+
+4.
+Change Settings to use Iso Image. 
+
+Switch to super user (administrator)
+
+sudo su
+
+apt-get install ubuntu-desktop
+apt install open-vm-tools-desktop
+
+udo bash 
+
+
+Reboot 
+
+apt update 

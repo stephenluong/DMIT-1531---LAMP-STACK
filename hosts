@@ -1,0 +1,22 @@
+127.0.0.1 localhost
+127.0.1.1 DMIT3FINAL
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+192..168.99.2 	site1.com
+192..168.99.3	site2.com
+192..168.99.3	site3.com
+192..168.99.3	site4.com
+
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  ens33:
+   dhcp4: no
+   addresses: [192.168.66.1/24]

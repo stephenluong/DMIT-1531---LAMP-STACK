@@ -1,0 +1,95 @@
+sudo su
+
+"q" - quit to exit service status checks. 
+
+1.
+Assign Static IP Address
+
+cd /etc/netplan 
+
+ls
+
+more 50-cloud-init.yaml 
+
+NOTE: The name of the interface in above screen is ens33
+Remember that because we will use it later.
+
+mv 50-cloud-init.yaml 50-cloud-init.yaml.bkup 
+
+vi ("i" insert mode for vi)
+ESC
+:wq!
+or
+
+nano 01-netcfg.yaml 
+
+SET FILE:
+
+network:
+ version: 2
+ renderer: networkd
+ ethernets:
+  ens33:
+   dhcp4: no
+   addresses: [192.168.55.100/24]
+
+
+2.
+netplan apply
+
+ifconfig - to confirm
+
+3.
+Login Webmin: on the left panel, expand on Networking > Network Configuration
+
+"Add new interface" 
+
+Name: ens33:### x whatever is needed. 
+
+Ping Virtual IPs "192.168.xx.xx" - "ctrl+C" to stop. 
+
+4.
+DNS hosts file Edit. 
+
+cd /etc 
+
+vi or nano hosts 
+
+127.0.0.1	localhost.localdomain	localhost
+::1		localhost6.localdomain6	localhost6
+192.168.55.101	site1.com
+192.168.55.102	site2.com
+192.168.55.103	site3.com
+
+
+connect hostname and ip
+
+insert "i"
+:wq!
+
+5.
+In Webmin > Apache Webserver <
+"Create virtual hosts" 
+"specific address" 
+PORT: Default
+Leave server name blank; as this is just initial configs. 
+
+Eg.
+
+/var/www/site1 
+
+cd /var/www
+
+ls
+
+Webmin: Networking and Addresses - Server Name >site1.com 
+
+Terminal: 
+
+cd /var/www/ 
+
+cd site1 
+ls
+vi or nano index.html
+
+

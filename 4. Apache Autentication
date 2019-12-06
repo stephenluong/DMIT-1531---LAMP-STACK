@@ -1,0 +1,69 @@
+
+
+htpasswd -c /etc/apache2/.htpasswd user1
+PW: password1
+htpasswd /etc/apache2/.htpasswd user2
+PW: password2
+
+cd /etc/apache2/sites-available
+
+ls
+
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
+
+cd /var/www/site2.com
+
+nano .htacess
+
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
+
+
+cd /etc/apache2
+
+ls
+SNAPSHOT OR BACKUP YOUR FILE
+cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkup
+
+
+nano apache2.conf
+AllowOverride All
+
+service apache2 restart
+
+cd /etc/apache2/sites-available
+
+nano site4.com.conf
+
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require user user1
+
+service apache2 restart
+cd /var/www/site4.com
+
+nano .htacess
+
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require user user1
+
+#Confirm
+ls -all
+
+Here is the explanation of each directive
+
+1. AuthType: Defines the type of authentication, basic in this example
+
+2. AuthName: Defines the message displayed on the password prompt from the browser.
+
+3. AuthUserFile: Defines the location of the password file.
+
+4. Require: Specifies that only authenticates users are granted access.

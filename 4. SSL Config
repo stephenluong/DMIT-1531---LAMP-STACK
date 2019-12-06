@@ -1,0 +1,68 @@
+﻿1.
+Add another network interface in webmin: network configuration. 
+
+confirm in terminal: 
+more /etc/netplan/01-netcfg.yaml
+
+Add site###.com domain name to hosts file. 
+
+cd /etc/
+
+nano hosts
+
+ls 
+
+cd /var/www
+
+mkdir site4
+
+ls 
+
+cd site4
+
+nano index.html
+
+Edit textfile "Welcome to my site etc..." 
+
+more index.html < confirmation > 
+
+2.
+<loads SSL + Activates it> 
+
+a2enmod ssl
+
+service apache2 restart 
+ 
+mkdir /etc/apache2/ssl 
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+
+<The Common name should be identical to the site we are going to create (site4.com) otherwise it won’t work.>
+
+***Common Name (e.g. server FQDN or YOUR name) []:site4.com*** 
+
+cd /etc/apache2/ssl 
+ls
+
+2.
+To add SSL to site.com.conf file
+
+cd /etc/apache2/sites-available 
+nano site###.com.conf
+
+3.
+add the following inside the site###.com.conf file:
+-Under
+ServerName site4.com
+SSLEngine on
+SSLCertificateFile /etc/apache2/ssl/apache.crt
+SSLCertificatekeyFile /etc/apache2/ssl/apache.key
+
+4.
+a2ensite site4.com 
+service apache2 reload
+
+https://site4.com
+
+
+
